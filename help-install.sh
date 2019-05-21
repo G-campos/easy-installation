@@ -9,8 +9,8 @@
 ####################################################################
 
 echo "==========================================================
-        Digite o número do componente a ser instalado:
-            ID  -   PROGRAMA        ORIGEM
+        Enter the ID of the component to be installed:
+            ID  -   PROGRAM	        ORIGEN
             
             1   -   GDEBI           APT
             2   -   GIMP            SNAP
