@@ -22,25 +22,36 @@ function update(){
 	fi
 	echo "Packages successfully updated"
 }
-function upsys(){
-	if [[ condition ]]; then
-		#statements
-	fi
+
+function progress_bar(){
+	coluna=$(tput cols)
+	linha=$(tput lines)
+
+	tput cup 1 0
+	echo "["
+	tput cup 1 $coluna
+	echo "]"
+
+	tput cup 1 1
+		for (( i=0; i<$coluna-2; i++ )); do
+  			printf '%.s=' $i
+  			sleep 0.01
+		done
+	echo
 }
-
-
-
-
-
-
-
-
+ 
 
 echo "Do you want to update before you start?
 Yes(y) or Not(any key)"
 echo "->Option:  "
-read funtion upsys()
+read $op
 
+	if [ $op == y || $op == Y ]; then
+		echo "starting the update..."
+		progress_bar
+		sleep 1
+
+	fi
 
 echo "==========================================================
         Enter the ID of the component to be installed:
