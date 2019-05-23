@@ -18,6 +18,7 @@ function progress_bar(){
 	echo "]"
 
 	tput cup 1 1
+		clear
 		for (( i=0; i<$coluna-2; i++ )); do
   			printf '%.s=' $i
   			sleep 0.01
@@ -49,8 +50,6 @@ function sys_update(){
 		echo 1		
 	fi
 	echo "Snapshots updated successfully"
-
-
 }
 
 function softwares(){
@@ -79,39 +78,50 @@ function softwares(){
             19  -   VS CODE         SNAP
             20  -   VLC             SNAP
             21  -   WPS OFFICE      SNAP
-            0   -   SAIR
-
-
+            0   -   SAIR 
 ==========================================================="
-select i in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 ; do
-	case "$i" in
-			1)
-			echo "1   -   GDEBI           APT"	
-			sudo apt-get install gdebi -y;;
+	select i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 0; do
+		case "$i" in
+				1)
+				clear
+				echo "1   -   GDEBI           APT"	
+				sudo apt-get install gdebi -y;;
 
-			2)
-			echo "2   -   GIMP            SNAP"
-			sudo snap install gimp 
-	esac	
-	
+				2)
+				clear
+				echo "2   -   GIMP            SNAP"
+				sudo snap install gimp ;;
 
+				0)
+			        echo "Exit..."
+			        clear
+			        exit ;;
+			    *)	
+					clear 
+			        echo
+			        echo "ERROR: invalid option!!"
+			        echo 
+			        ;;
+		esac
+	done
 
 }
 ##########################################################################
  
-
+clear
 echo "Do you want to update before you start?
 Yes(y) or Not(any key)"
 echo "->Option:  "
 read op
 
-	if [ $op == y || $op == Y ]; then
+	if [ $op == y ]; then
 		echo "starting the update..."
 		progress_bar
 		sleep 1
-		#sys_update
-		#sleep 1
-		softwares
+		clear
+		sys_update
+		sleep 1
+		#softwares
 	fi
 
 
