@@ -7,7 +7,7 @@
 #Script developed from examples found in the forum of viva la linux
 #
 ####################################################################
-# funtions...
+#
 function progress_bar(){
 	coluna=$(tput cols)
 	linha=$(tput lines)
