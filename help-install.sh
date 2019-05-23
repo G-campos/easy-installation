@@ -7,22 +7,7 @@
 #Script developed from examples found in the forum of viva la linux
 #
 ####################################################################
-function update(){
-	echo "Updating repositories..."
-	if ! sudo apt-get update ; then
-		echo "Unable to update repositories. Check your file /etc/apt/sources.list"
-		exit 1
-	fi
-	echo "Repositories successfully updated"
-
-	echo "Updating already installed packages..."
-	if ! sudo apt-get upgrade -y ; then
-		echo "Could not update packages."
-		echo 1		
-	fi
-	echo "Packages successfully updated"
-}
-
+# funtions...
 function progress_bar(){
 	coluna=$(tput cols)
 	linha=$(tput lines)
@@ -39,21 +24,37 @@ function progress_bar(){
 		done
 	echo
 }
- 
 
-echo "Do you want to update before you start?
-Yes(y) or Not(any key)"
-echo "->Option:  "
-read $op
-
-	if [ $op == y || $op == Y ]; then
-		echo "starting the update..."
-		progress_bar
-		sleep 1
-
+function sys_update(){
+	echo "Updating repositories..."
+	progress_bar
+	if ! sudo apt-get update ; then
+		echo "Unable to update repositories. Check your file /etc/apt/sources.list"
+		exit 1
 	fi
+	echo "Repositories successfully updated"
 
-echo "==========================================================
+	echo "Updating already installed packages..."
+	progress_bar
+	if ! sudo apt-get upgrade -y ; then
+		echo "Could not update packages."
+		echo 1		
+	fi
+	echo "Packages successfully updated"
+
+	echo "Updating already installed packages for snap..."
+	progress_bar
+	if ! sudo snap refresh ; then
+		echo "Could not update snapshots."
+		echo 1		
+	fi
+	echo "Snapshots updated successfully"
+
+
+}
+
+function softwares(){
+	echo "==========================================================
         Enter the ID of the component to be installed:
             ID  -   PROGRAM	        ORIGEN
             
@@ -65,7 +66,7 @@ echo "==========================================================
             6   -   JAVA SDK        DOWNLOAD
             7   -   KOLOURPAINT     SNAP
             8   -   NETBEANS        SNAP
-            9   -   NODEJS          SNAP
+            9   -   NODEJS          PAT
             10  -   PHPSTORM        SNAP
             11  -   POSTMAN         SNAP
             12  -   RUBYMINE        SNAP
@@ -82,3 +83,35 @@ echo "==========================================================
 
 
 ==========================================================="
+select i in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 ; do
+	case "$i" in
+			1)
+			echo "1   -   GDEBI           APT"	
+			sudo apt-get install gdebi -y;;
+
+			2)
+			echo "2   -   GIMP            SNAP"
+			sudo snap install gimp 
+	esac	
+	
+
+
+}
+##########################################################################
+ 
+
+echo "Do you want to update before you start?
+Yes(y) or Not(any key)"
+echo "->Option:  "
+read op
+
+	if [ $op == y || $op == Y ]; then
+		echo "starting the update..."
+		progress_bar
+		sleep 1
+		#sys_update
+		#sleep 1
+		softwares
+	fi
+
+
