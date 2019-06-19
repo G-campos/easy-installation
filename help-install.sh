@@ -8,6 +8,7 @@
 #
 ####################################################################
 #
+
 function progress_bar(){
 	coluna=$(tput cols)
 	linha=$(tput lines)
@@ -106,6 +107,12 @@ function softwares(){
 	done
 
 }
+
+
+
+
+
+
 ##########################################################################
  
 clear
@@ -121,7 +128,9 @@ read op
 		clear
 		sys_update
 		sleep 1
-		#softwares
+		softwares
+	else
+		echo ""
 	fi
 
 
