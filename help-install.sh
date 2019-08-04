@@ -1,6 +1,6 @@
 #!/bin/bash
 #help-install.sh
-#developed by Campos, distributed the Kontrol Bits System
+#developed by Campos, distributed the Kontrol Bits Systens
 #origin: https://github.com/G-campos/easy-installation
 #I hope the feedback =)
 #
